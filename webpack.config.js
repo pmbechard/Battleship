@@ -1,4 +1,6 @@
 const path = require('path');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -10,6 +12,10 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  plugins: [
+    new FaviconsWebpackPlugin(),
+    new HtmlWebpackPlugin({ title: 'Test' }),
+  ],
   module: {
     rules: [
       {
@@ -33,10 +39,6 @@ module.exports = {
             presets: [['@babel/preset-env', { targets: 'defaults' }]],
           },
         },
-      },
-      {
-        test: /\.html$/i,
-        loader: 'html-loader',
       },
     ],
   },
