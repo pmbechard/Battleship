@@ -1,4 +1,4 @@
-import { createShip } from './ship-factory';
+import { createShip } from './ship';
 
 describe('Tests ship of length 4 functions hit() and isSunk()', () => {
   let ship = createShip(4);
