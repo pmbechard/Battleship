@@ -1,5 +1,3 @@
-const TOTAL_SHIP_POSITIONS = 17;
-
 export class Board {
   constructor() {
     this.board = new Array(10).fill(0).map(() => new Array(10).fill(0));
@@ -9,46 +7,38 @@ export class Board {
   }
 
   place(ship, coord, dir) {
-    if (!this.#checkValidPlace(ship, coord, dir)) return;
+    if (!this.#checkValidPlace(ship, coord, dir)) return false;
+
+    this.ships.push(ship);
+
+    let pos = new Array();
     if (dir === 'x') {
-      let counter = 0;
-      let pos = [];
-      while (counter < ship.len) {
-        this.board[coord[0]][coord[1] + counter] = 1;
-        pos.push(this.board[coord[0] - counter][coord[1]]);
-        counter++;
-        console.log(this.board);
+      for (let i = 0; i < ship.len; i++) {
+        this.board[coord[0]][coord[1] + i] = ship;
+        pos.push([coord[0], coord[1] + i]);
       }
     } else if (dir === 'y') {
-      let counter = 0;
-      let pos = [];
-      while (counter < ship.len) {
-        this.board[coord[0] - counter][coord[1]] = 1;
-        pos.push(this.board[coord[0] - counter][coord[1]]);
-        counter++;
+      for (let i = 0; i < ship.len; i++) {
+        this.board[coord[0] - i][coord[1]] = ship;
+        pos.push([coord[0] - i, coord[1]]);
       }
     }
-    this.ships.push(ship);
     ship.setCoords(pos);
   }
 
   #checkValidPlace(ship, coord, dir) {
-    if (dir === 'x') {
-      if (coord[1] + ship.len <= 10) {
-        for (let i = 0; i < ship.len; i++) {
-          if (this.board[coord[0]][coord[1] + i] !== 0) {
-            return false;
-          }
-        }
-      }
-    } else if (coord[0] - ship.len + 1 >= 0) {
+    if (coord[0] > 9 || coord[1] > 9) return false;
+    if (dir === 'y' && coord[0] - ship.len + 1 < 0) return false;
+    if (dir === 'y') {
       for (let i = 0; i < ship.len; i++) {
-        if (this.board[coord[0] - i][coord[1]] !== 0) {
-          return false;
-        }
+        if (this.board[coord[0]][coord[1] + i] !== 0) return false;
       }
-    } else {
-      return false;
+    }
+    if (dir === 'x' && coord[1] + ship.len > 9) return false;
+    if (dir === 'x') {
+      for (let i = 0; i < ship.len; i++) {
+        if (this.board[coord[0]][coord[1] + i] !== 0) return false;
+      }
     }
     return true;
   }
@@ -57,20 +47,18 @@ export class Board {
     if (this.board[coord[0]][coord[1]] !== 0) {
       this.hits.push(coord);
       this.board[coord[0]][coord[1]].hit(coord);
-
-      if (this.checkAllSunk()) {
-        return null;
-      } else {
-        return true;
+      if (this.board[coord[0]][coord[1]].isSunk()) {
+        if (this.checkAllSunk()) {
+          // TODO: GAME OVER
+        }
       }
-    } else {
-      this.missedShots.push(coord);
-      return false;
+      return true;
     }
+    this.misses.push(coord);
+    return false;
   }
 
   checkAllSunk() {
-    // TODO: refactor to use ships' isSunk() functions
-    return this.hits.length === TOTAL_SHIP_POSITIONS;
+    return this.ships.filter((ship) => ship.isSunk()).length === 5;
   }
 }

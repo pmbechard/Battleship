@@ -11,14 +11,13 @@ describe('Tests ship of length 4 functions hit() and isSunk()', () => {
     expect(ship.isSunk()).toBe(false);
   });
 
-  ship.setCoords([
-    [0, 0],
-    [0, 1],
-    [0, 2],
-    [0, 3],
-  ]);
-
   test('Hit function marks hit position', () => {
+    ship.setCoords([
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [0, 3],
+    ]);
     ship.hit([0, 0]);
     expect(ship.damage).toBe(1);
   });
