@@ -17,15 +17,15 @@ describe('Tests a specific game board instance', () => {
     gameBoard.place(ship, [0, 0], 'x');
     gameBoard.place(ship, [9, 0], 'y');
 
-    expect(gameBoard.board[0][0]).not.toBe(1);
-    expect(gameBoard.board[0][1]).not.toBe(1);
-    expect(gameBoard.board[0][2]).not.toBe(1);
-    expect(gameBoard.board[0][3]).not.toBe(1);
+    expect(gameBoard.board[0][0]).not.toBe(0);
+    expect(gameBoard.board[0][1]).not.toBe(0);
+    expect(gameBoard.board[0][2]).not.toBe(0);
+    expect(gameBoard.board[0][3]).not.toBe(0);
 
-    expect(gameBoard.board[9][0]).not.toBe(1);
-    expect(gameBoard.board[8][0]).not.toBe(1);
-    expect(gameBoard.board[7][0]).not.toBe(1);
-    expect(gameBoard.board[6][0]).not.toBe(1);
+    expect(gameBoard.board[9][0]).not.toBe(0);
+    expect(gameBoard.board[8][0]).not.toBe(0);
+    expect(gameBoard.board[7][0]).not.toBe(0);
+    expect(gameBoard.board[6][0]).not.toBe(0);
   });
 
   test('Game board place() function should not allow ships to be placed in invalid positions', () => {
@@ -60,57 +60,57 @@ describe('Tests a specific game board instance', () => {
   });
 });
 
-// // TODO: create tests for checkAllSunk() function
-// describe('Tests board functionality by placing, hitting, and sinking all ships', () => {
-//   let carrier = new Ship(5);
-//   let battleship = new Ship(4);
-//   let cruiser = new Ship(3);
-//   let submarine = new Ship(3);
-//   let destroyer = new Ship(2);
-//   let board = new Board();
+// TODO: create tests for checkAllSunk() function
+describe('Tests board functionality by placing, hitting, and sinking all ships', () => {
+  let carrier = new Ship(5);
+  let battleship = new Ship(4);
+  let cruiser = new Ship(3);
+  let submarine = new Ship(3);
+  let destroyer = new Ship(2);
+  let board = new Board();
 
-//   board.place(carrier, [4, 0], 'y');
-//   board.place(battleship, [5, 3], 'x');
-//   board.place(cruiser, [8, 1], 'y');
-//   board.place(submarine, [2, 2], 'x');
-//   board.place(destroyer, [9, 6], 'y');
+  board.place(carrier, [4, 0], 'y');
+  board.place(battleship, [5, 3], 'x');
+  board.place(cruiser, [8, 1], 'y');
+  board.place(submarine, [2, 2], 'x');
+  board.place(destroyer, [9, 6], 'y');
 
-//   test('Returns true when all ships are sunk', () => {
-//     expect(board.checkAllSunk()).toBe(false);
-//   });
+  test('Returns true when all ships are sunk', () => {
+    expect(board.checkAllSunk()).toBe(false);
+  });
 
-//   test('Placement of carrier', () => {
-//     board.receiveAttack([4, 0]);
-//     board.receiveAttack([3, 0]);
-//     board.receiveAttack([2, 0]);
-//     board.receiveAttack([1, 0]);
-//     board.receiveAttack([0, 0]);
+  test('Placement of carrier', () => {
+    board.receiveAttack([4, 0]);
+    board.receiveAttack([3, 0]);
+    board.receiveAttack([2, 0]);
+    board.receiveAttack([1, 0]);
+    board.receiveAttack([0, 0]);
 
-//     expect(board.board[4][0]).toBe(1);
-//     expect(board.board[3][0]).toBe(1);
-//     expect(board.board[2][0]).toBe(1);
-//     expect(board.board[1][0]).toBe(1);
-//     expect(board.board[0][0]).toBe(1);
-//   });
+    expect(board.board[4][0]).not.toBe(0);
+    expect(board.board[3][0]).not.toBe(0);
+    expect(board.board[2][0]).not.toBe(0);
+    expect(board.board[1][0]).not.toBe(0);
+    expect(board.board[0][0]).not.toBe(0);
+  });
 
-//   test('Returns true when all ships are sunk', () => {
-//     board.receiveAttack([5, 3]);
-//     board.receiveAttack([5, 4]);
-//     board.receiveAttack([5, 5]);
-//     board.receiveAttack([5, 6]);
+  test('Returns true when all ships are sunk', () => {
+    board.receiveAttack([5, 3]);
+    board.receiveAttack([5, 4]);
+    board.receiveAttack([5, 5]);
+    board.receiveAttack([5, 6]);
 
-//     board.receiveAttack([8, 1]);
-//     board.receiveAttack([7, 1]);
-//     board.receiveAttack([6, 1]);
+    board.receiveAttack([8, 1]);
+    board.receiveAttack([7, 1]);
+    board.receiveAttack([6, 1]);
 
-//     board.receiveAttack([2, 2]);
-//     board.receiveAttack([2, 3]);
-//     board.receiveAttack([2, 4]);
+    board.receiveAttack([2, 2]);
+    board.receiveAttack([2, 3]);
+    board.receiveAttack([2, 4]);
 
-//     board.receiveAttack([9, 6]);
-//     board.receiveAttack([8, 6]);
+    board.receiveAttack([9, 6]);
+    board.receiveAttack([8, 6]);
 
-//     expect(board.hits.length).toBe(17);
-//     expect(board.checkAllSunk()).toBe(true);
-//   });
-// });
+    expect(board.hits.length).toBe(17);
+    expect(board.checkAllSunk()).toBe(true);
+  });
+});
