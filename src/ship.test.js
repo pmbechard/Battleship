@@ -1,7 +1,7 @@
-import { createShip } from './ship';
+import { Ship } from './ship';
 
 describe('Tests ship of length 4 functions hit() and isSunk()', () => {
-  let ship = createShip(4);
+  let ship = new Ship(4);
 
   test('Ship is instantiated with proper length', () => {
     expect(ship.len).toBe(4);
@@ -11,20 +11,22 @@ describe('Tests ship of length 4 functions hit() and isSunk()', () => {
     expect(ship.isSunk()).toBe(false);
   });
 
-  test('Hit function marks hit position', () => {
-    ship.hit(0);
-    expect(ship.hitPositions[0]).toBe(true);
-  });
+  ship.setCoords([
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+  ]);
 
-  test('Hit function marks multiple hit positions', () => {
-    ship.hit(2);
-    expect(ship.hitPositions[0]).toBe(true);
-    expect(ship.hitPositions[2]).toBe(true);
+  test('Hit function marks hit position', () => {
+    ship.hit([0, 0]);
+    expect(ship.damage).toBe(1);
   });
 
   test('Ship is sunk when all positions are hit', () => {
-    ship.hit(1);
-    ship.hit(3);
+    ship.hit([0, 1]);
+    ship.hit([0, 2]);
+    ship.hit([0, 3]);
     expect(ship.isSunk()).toBe(true);
   });
 });
