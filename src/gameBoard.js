@@ -48,17 +48,20 @@ export class Board {
       this.hits.push(coord);
       this.board[coord[0]][coord[1]].hit(coord);
       if (this.board[coord[0]][coord[1]].isSunk()) {
-        if (this.checkAllSunk()) {
+        if (this.#checkAllSunk()) {
           // TODO: GAME OVER
         }
       }
       return true;
     }
+    for (let i = 0; i < this.misses.length; i++) {
+      if (this.misses[i] === coord) return null;
+    }
     this.misses.push(coord);
     return false;
   }
 
-  checkAllSunk() {
+  #checkAllSunk() {
     return this.ships.filter((ship) => ship.isSunk()).length === 5;
   }
 }
