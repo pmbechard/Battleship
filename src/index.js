@@ -1,7 +1,16 @@
+import { createDom } from './domCreation';
+import { Player } from './player';
 import './style.css';
 
-const title = document.createElement('h1');
-document.body.appendChild(title);
-title.textContent = 'Test';
+// TODO: create main game loop here
+// TODO: add new module for DOM creation and manipulation
 
-// Main game loop goes here
+createDom();
+
+let gameOn = true;
+const user = new Player();
+const com = new Player();
+user.opponent = com;
+com.opponent = user;
+
+while (gameOn) {}

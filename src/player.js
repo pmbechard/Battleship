@@ -1,12 +1,18 @@
-class Player {
-  constructor(board, opponent) {
-    this.#board = board;
-    this.#opponent = opponent;
-    this.#isUser;
+import { Board } from './gameboard';
+
+export class Player {
+  constructor() {
+    this.board = new Board();
+    this.opponent;
+    // this.#isUser;
   }
 
   get board() {
     return this.board;
+  }
+
+  set opponent(opponent) {
+    this.opponent = opponent;
   }
 
   aiAttack() {
@@ -15,13 +21,13 @@ class Player {
       Math.round(Math.random() * 10),
       Math.round(Math.random() * 10),
     ];
-    let shot = this.#opponent.board().receiveAttack(coord);
+    let shot = this.opponent.board().receiveAttack(coord);
     if (shot === null) return false;
     return true;
   }
 
   userAttack(coord) {
-    let shot = this.#opponent.board().receiveAttack(coord);
+    let shot = this.opponent.board().receiveAttack(coord);
     if (shot === null) return false;
     return true;
   }

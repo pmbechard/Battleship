@@ -1,6 +1,99 @@
+@font-face {
+  font-family: 'VT';
+  src: url(fonts/VT323-Regular.ttf);
+}
+
 * {
   margin: 0;
   padding: 0;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'VT', monospace;
+  overflow-y: auto;
+}
+
+.main-content {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  background-image: url(img/metal-bg.jpg);
+  background-size: cover;
+}
+
+.title {
+  width: 100vw;
+  text-align: center;
+  padding: 20px 0;
+  color: rgb(0, 179, 0);
+  text-shadow: 1px 1px 1px black;
+  font-size: min(15vw, 72px);
+}
+
+.board-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-board {
+  width: 300px;
+  height: 300px;
+  background-color: #333;
+  margin: 20px 0;
+
+  /* display: grid; */
+  display: none;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.grid-point {
+  border: 0.1px solid rgb(0, 179, 0);
+}
+
+.toast {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: rgb(0, 179, 0);
+  text-align: center;
+  border-radius: 2px;
+  position: fixed;
+  z-index: 1;
+  padding: 16px;
+  left: calc(50% - 116px);
+  bottom: 30px;
+  font-size: 24px;
+}
+
+.toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+.start-btn {
+  width: 40vw;
+  margin: 30vw;
+  font-size: 32px;
 }

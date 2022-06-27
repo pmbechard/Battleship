@@ -14,7 +14,7 @@ module.exports = {
   },
   plugins: [
     new FaviconsWebpackPlugin(),
-    new HtmlWebpackPlugin({ title: 'Test' }),
+    new HtmlWebpackPlugin({ title: 'Battleship' }),
   ],
   module: {
     rules: [
