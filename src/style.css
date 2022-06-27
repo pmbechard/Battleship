@@ -33,6 +33,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .game-board {
@@ -51,7 +53,7 @@
 }
 
 .toast {
-  visibility: hidden;
+  display: none;
   width: 200px;
   background-color: #333;
   color: rgb(0, 179, 0);
@@ -66,7 +68,7 @@
 }
 
 .toast.show {
-  visibility: visible;
+  display: block;
   animation: fadein 0.5s, fadeout 0.5s 4.5s;
 }
 
@@ -96,4 +98,8 @@
   width: 40vw;
   margin: 30vw;
   font-size: 32px;
+}
+
+.rotate-btn {
+  display: none;
 }

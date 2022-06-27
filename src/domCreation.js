@@ -1,4 +1,5 @@
 import bg from './img/metal-bg.jpg';
+import rotateIcon from './img/rotate.png';
 
 export function createDom() {
   const mainContent = document.createElement('div');
@@ -25,6 +26,14 @@ export function createDom() {
       gridPoint.classList.add('grid-point');
     }
   }
+
+  const rotateBtn = document.createElement('button');
+  const rotateImg = document.createElement('img');
+  rotateImg.src = rotateIcon;
+  rotateImg.style.height = '30px';
+  rotateBtn.appendChild(rotateImg);
+  userBoardContainer.appendChild(rotateBtn);
+  rotateBtn.classList.add('rotate-btn');
 
   const comBoardContainer = document.createElement('div');
   mainContent.appendChild(comBoardContainer);
@@ -55,6 +64,7 @@ export function createDom() {
   startBtn.addEventListener('click', () => {
     startBtn.style.display = 'none';
     userBoard.style.display = 'grid';
+    rotateBtn.style.display = 'block';
     toastMsg.classList.add('show');
     setTimeout(function () {
       toastMsg.classList.remove('show');
