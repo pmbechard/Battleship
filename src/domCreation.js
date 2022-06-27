@@ -24,6 +24,7 @@ export function createDom() {
       const gridPoint = document.createElement('div');
       userBoard.appendChild(gridPoint);
       gridPoint.classList.add('grid-point');
+      gridPoint.id = `user-${i}-${j}`;
     }
   }
 
@@ -34,6 +35,7 @@ export function createDom() {
   rotateBtn.appendChild(rotateImg);
   userBoardContainer.appendChild(rotateBtn);
   rotateBtn.classList.add('rotate-btn');
+  rotateBtn.id = 'rotate-btn';
 
   const comBoardContainer = document.createElement('div');
   mainContent.appendChild(comBoardContainer);
@@ -48,6 +50,7 @@ export function createDom() {
       const gridPoint = document.createElement('div');
       comBoard.appendChild(gridPoint);
       gridPoint.classList.add('grid-point');
+      gridPoint.id = `com-${i}-${j}`;
     }
   }
 

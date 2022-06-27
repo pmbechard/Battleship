@@ -4,11 +4,7 @@ export class Player {
   constructor() {
     this.board = new Board();
     this.opponent;
-    // this.#isUser;
-  }
-
-  get board() {
-    return this.board;
+    // this.isUser;
   }
 
   set opponent(opponent) {

@@ -24,6 +24,7 @@ export class Board {
       }
     }
     ship.setCoords(pos);
+    return true;
   }
 
   #checkValidPlace(ship, coord, dir) {
