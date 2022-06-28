@@ -11,8 +11,17 @@ export function createDom() {
   title.textContent = 'Battleship';
   title.classList.add('title');
 
+  const gridsContainer = document.createElement('div');
+  mainContent.appendChild(gridsContainer);
+  gridsContainer.style.display = 'flex';
+  gridsContainer.style.justifyContent = 'center';
+  gridsContainer.style.alignItems = 'center';
+  // gridsContainer.style.flexWrap = 'wrap';
+  gridsContainer.style.width = '100vw';
+  gridsContainer.id = 'grids-container';
+
   const comBoardContainer = document.createElement('div');
-  mainContent.appendChild(comBoardContainer);
+  gridsContainer.appendChild(comBoardContainer);
   comBoardContainer.classList.add('board-container');
 
   const enemyGridTitle = document.createElement('p');
@@ -35,7 +44,7 @@ export function createDom() {
   }
 
   const userBoardContainer = document.createElement('div');
-  mainContent.appendChild(userBoardContainer);
+  gridsContainer.appendChild(userBoardContainer);
   userBoardContainer.classList.add('board-container');
 
   const userGridTitle = document.createElement('p');
