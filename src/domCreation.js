@@ -34,6 +34,7 @@ export function createDom() {
   comBoardContainer.appendChild(comBoard);
   comBoard.id = 'com-board';
   comBoard.classList.add('game-board');
+  comBoard.style.display = 'none';
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const gridPoint = document.createElement('div');

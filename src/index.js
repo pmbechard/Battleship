@@ -95,7 +95,6 @@ function initializeGameLayout() {
   rotateBtn.style.display = 'none';
   dirTxt.style.display = 'none';
 
-  //   setInterval(() => {}, 3000);
   const userBoard = document.getElementById('user-board');
   userBoard.style.display = 'grid';
   const userGridTitle = document.getElementById('user-grid-title');
@@ -129,3 +128,4 @@ function initializeGameLayout() {
 }
 
 // TODO: start game loop
+// TODO: add clear function and restart option
