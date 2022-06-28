@@ -36,7 +36,6 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  /* animation: fadein 0.5s, fadeout 0.5s 4.5s; */
 }
 
 .game-board {
@@ -44,7 +43,6 @@
   height: 300px;
   margin: 20px 0;
 
-  /* display: grid; */
   display: none;
   grid-template-columns: repeat(10, 1fr);
   /* animation: fadein 0.5s, fadeout 0.5s 4.5s; */
@@ -76,7 +74,6 @@
   text-align: center;
   border-radius: 2px;
   padding: 16px;
-  /* left: calc(50% - 116px); */
   margin: 0 auto;
   font-size: 24px;
   border: 1px solid #ddd;

@@ -7,10 +7,6 @@ export class Player {
     // this.isUser;
   }
 
-  set opponent(opponent) {
-    this.opponent = opponent;
-  }
-
   aiAttack() {
     // FIXME: make smarter
     let coord = [
@@ -23,7 +19,7 @@ export class Player {
   }
 
   userAttack(coord) {
-    let shot = this.opponent.board().receiveAttack(coord);
+    let shot = this.opponent.board.receiveAttack(coord);
     if (shot === null) return false;
     return true;
   }
