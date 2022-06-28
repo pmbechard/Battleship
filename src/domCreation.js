@@ -15,6 +15,12 @@ export function createDom() {
   mainContent.appendChild(comBoardContainer);
   comBoardContainer.classList.add('board-container');
 
+  const enemyGridTitle = document.createElement('p');
+  comBoardContainer.appendChild(enemyGridTitle);
+  enemyGridTitle.textContent = 'Enemy Waters';
+  enemyGridTitle.style.display = 'none';
+  enemyGridTitle.id = 'enemy-grid-title';
+
   const comBoard = document.createElement('div');
   comBoardContainer.appendChild(comBoard);
   comBoard.id = 'com-board';
@@ -31,6 +37,12 @@ export function createDom() {
   const userBoardContainer = document.createElement('div');
   mainContent.appendChild(userBoardContainer);
   userBoardContainer.classList.add('board-container');
+
+  const userGridTitle = document.createElement('p');
+  userBoardContainer.appendChild(userGridTitle);
+  userGridTitle.textContent = 'Friendly Waters';
+  userGridTitle.style.display = 'none';
+  userGridTitle.id = 'user-grid-title';
 
   const userBoard = document.createElement('div');
   userBoardContainer.appendChild(userBoard);
@@ -59,7 +71,6 @@ export function createDom() {
   directionTxt.textContent = 'direction: x';
   directionTxt.id = 'dir-txt';
   directionTxt.style.display = 'none';
-  directionTxt.style.fontSize = '20px';
 
   const toastMsg = document.createElement('div');
   mainContent.appendChild(toastMsg);

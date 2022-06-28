@@ -80,6 +80,9 @@ userGrid.forEach((point) => {
       });
     }
     if (user.board.ships.length === 5) {
+      const userBoard = document.getElementById('user-board');
+      userBoard.style.display = 'none';
+
       initializeGameLayout();
     }
   });
@@ -92,8 +95,16 @@ function initializeGameLayout() {
   rotateBtn.style.display = 'none';
   dirTxt.style.display = 'none';
 
+  //   setInterval(() => {}, 3000);
+  const userBoard = document.getElementById('user-board');
+  userBoard.style.display = 'grid';
+  const userGridTitle = document.getElementById('user-grid-title');
+  userGridTitle.style.display = 'grid';
+
   const comBoard = document.getElementById('com-board');
   comBoard.style.display = 'grid';
+  const enemyGridTitle = document.getElementById('enemy-grid-title');
+  enemyGridTitle.style.display = 'grid';
 
   const toastMsg = document.getElementById('toast');
   if (toastMsg.classList.contains('show')) {
@@ -113,9 +124,8 @@ function initializeGameLayout() {
       toastMsg.classList.remove('show');
     }, 5000);
   }
+
+  // TODO: place enemy ships
 }
 
-// TODO:
-// place com ships
-// display both grids
-// let turns go back and forth until one allSunk() is true
+// TODO: start game loop

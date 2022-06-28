@@ -36,6 +36,7 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  /* animation: fadein 0.5s, fadeout 0.5s 4.5s; */
 }
 
 .game-board {
@@ -46,6 +47,7 @@
   /* display: grid; */
   display: none;
   grid-template-columns: repeat(10, 1fr);
+  /* animation: fadein 0.5s, fadeout 0.5s 4.5s; */
 }
 
 .grid-point {
@@ -71,6 +73,8 @@
   left: calc(50% - 116px);
   bottom: 30px;
   font-size: 24px;
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 1px #333;
 }
 
 .toast.show {
@@ -109,4 +113,8 @@
 
 .rotate-btn {
   display: none;
+}
+
+p {
+  font-size: 20px;
 }
