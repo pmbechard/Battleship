@@ -8,7 +8,14 @@ createDom();
 let direction = 'x';
 const rotateBtn = document.getElementById('rotate-btn');
 rotateBtn.addEventListener('click', () => {
-  direction === 'x' ? (direction = 'y') : (direction = 'x');
+  const dirTxt = document.getElementById('dir-txt');
+  if (direction === 'x') {
+    direction = 'y';
+    dirTxt.textContent = 'direction: y';
+  } else {
+    direction = 'x';
+    dirTxt.textContent = 'direction: x';
+  }
 });
 const user = new Player();
 const userGrid = document.querySelectorAll('#user-board .grid-point');
@@ -19,7 +26,6 @@ let allShips = [
   new Ship(3),
   new Ship(2),
 ];
-console.log(allShips);
 userGrid.forEach((point) => {
   point.addEventListener('click', () => {
     let coord = point.id.split('-');
@@ -40,10 +46,16 @@ userGrid.forEach((point) => {
       });
     }
     if (user.board.ships.length === 5) {
-      // TODO: change screen
+      disableUserGrid();
     }
   });
 });
+
+function disableUserGrid() {
+  userGrid.forEach((point) => {
+    point.style.pointerEvents = 'none';
+  });
+}
 
 // TODO:
 // place com ships

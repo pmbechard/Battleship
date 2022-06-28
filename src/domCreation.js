@@ -37,6 +37,12 @@ export function createDom() {
   rotateBtn.classList.add('rotate-btn');
   rotateBtn.id = 'rotate-btn';
 
+  const directionTxt = document.createElement('p');
+  userBoardContainer.appendChild(directionTxt);
+  directionTxt.textContent = 'direction: x';
+  directionTxt.id = 'dir-txt';
+  directionTxt.style.display = 'none';
+
   const comBoardContainer = document.createElement('div');
   mainContent.appendChild(comBoardContainer);
   comBoardContainer.classList.add('board-container');
@@ -68,6 +74,7 @@ export function createDom() {
     startBtn.style.display = 'none';
     userBoard.style.display = 'grid';
     rotateBtn.style.display = 'block';
+    directionTxt.style.display = 'block';
     toastMsg.classList.add('show');
     setTimeout(function () {
       toastMsg.classList.remove('show');
