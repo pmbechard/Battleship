@@ -64,6 +64,7 @@ export function createDom() {
   const toastMsg = document.createElement('div');
   mainContent.appendChild(toastMsg);
   toastMsg.classList.add('toast');
+  toastMsg.id = 'toast';
   toastMsg.textContent = 'Choose the location of your ships';
 
   const startBtn = document.createElement('button');

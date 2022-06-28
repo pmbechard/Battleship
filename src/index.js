@@ -94,6 +94,25 @@ function initializeGameLayout() {
 
   const comBoard = document.getElementById('com-board');
   comBoard.style.display = 'grid';
+
+  const toastMsg = document.getElementById('toast');
+  if (toastMsg.classList.contains('show')) {
+    setTimeout(() => {
+      toastMsg.textContent =
+        'Your turn. Choose a point on the enemy grid to attack.';
+      toastMsg.classList.add('show');
+      setTimeout(function () {
+        toastMsg.classList.remove('show');
+      }, 5000);
+    }, 3000);
+  } else {
+    toastMsg.textContent =
+      'Your turn. Choose a point on the enemy grid to attack.';
+    toastMsg.classList.add('show');
+    setTimeout(function () {
+      toastMsg.classList.remove('show');
+    }, 5000);
+  }
 }
 
 // TODO:
