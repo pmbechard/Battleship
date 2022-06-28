@@ -106,21 +106,22 @@ function initializeGameLayout() {
   enemyGridTitle.style.display = 'grid';
 
   const toastMsg = document.getElementById('toast');
-  if (toastMsg.classList.contains('show')) {
+  const toastContainer = document.getElementById('toast-container');
+  if (toastContainer.classList.contains('show')) {
     setTimeout(() => {
       toastMsg.textContent =
         'Your turn. Choose a point on the enemy grid to attack.';
-      toastMsg.classList.add('show');
+      toastContainer.classList.add('show');
       setTimeout(function () {
-        toastMsg.classList.remove('show');
+        toastContainer.classList.remove('show');
       }, 5000);
     }, 3000);
   } else {
     toastMsg.textContent =
       'Your turn. Choose a point on the enemy grid to attack.';
-    toastMsg.classList.add('show');
+    toastContainer.classList.add('show');
     setTimeout(function () {
-      toastMsg.classList.remove('show');
+      toastContainer.classList.remove('show');
     }, 5000);
   }
 

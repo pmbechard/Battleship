@@ -82,8 +82,13 @@ export function createDom() {
   directionTxt.id = 'dir-txt';
   directionTxt.style.display = 'none';
 
+  const toastContainer = document.createElement('div');
+  toastContainer.classList.add('toast-container');
+  mainContent.appendChild(toastContainer);
+  toastContainer.id = 'toast-container';
+
   const toastMsg = document.createElement('div');
-  mainContent.appendChild(toastMsg);
+  toastContainer.appendChild(toastMsg);
   toastMsg.classList.add('toast');
   toastMsg.id = 'toast';
   toastMsg.textContent = 'Choose the location of your ships';
@@ -98,9 +103,9 @@ export function createDom() {
     userBoard.style.display = 'grid';
     rotateBtn.style.display = 'block';
     directionTxt.style.display = 'block';
-    toastMsg.classList.add('show');
+    toastContainer.classList.add('show');
     setTimeout(function () {
-      toastMsg.classList.remove('show');
+      toastContainer.classList.remove('show');
     }, 5000);
   });
 

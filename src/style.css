@@ -30,7 +30,6 @@
 }
 
 .board-container {
-  /* width: 100vw; */
   margin: 0 20px;
   display: flex;
   justify-content: center;
@@ -61,24 +60,30 @@
   cursor: cell;
 }
 
-.toast {
+.toast-container {
+  width: 100vw;
+
   display: none;
-  width: 200px;
+  position: fixed;
+  z-index: 1;
+  bottom: 30px;
+}
+
+.toast {
+  width: max(200px, 30vw);
   background-color: #333;
   color: rgb(0, 179, 0);
   text-align: center;
   border-radius: 2px;
-  position: fixed;
-  z-index: 1;
   padding: 16px;
-  left: calc(50% - 116px);
-  bottom: 30px;
+  /* left: calc(50% - 116px); */
+  margin: 0 auto;
   font-size: 24px;
   border: 1px solid #ddd;
   box-shadow: 1px 1px 1px #333;
 }
 
-.toast.show {
+.toast-container.show {
   display: block;
   animation: fadein 0.5s, fadeout 0.5s 4.5s;
 }
