@@ -42,6 +42,7 @@ export function createDom() {
   directionTxt.textContent = 'direction: x';
   directionTxt.id = 'dir-txt';
   directionTxt.style.display = 'none';
+  directionTxt.style.fontSize = '20px';
 
   const comBoardContainer = document.createElement('div');
   mainContent.appendChild(comBoardContainer);

@@ -27,6 +27,40 @@ let allShips = [
   new Ship(2),
 ];
 userGrid.forEach((point) => {
+  point.addEventListener('mouseover', () => {
+    point.classList.add('grid-point-hover');
+    let ship = allShips[user.board.ships.length];
+    let current = point;
+
+    if (direction === 'x') {
+      for (let i = 0; i < ship.len - 1; i++) {
+        if (current.id.charAt(7) === '9') {
+          break;
+        }
+        current.nextElementSibling.classList.add('grid-point-hover');
+        current = current.nextElementSibling;
+      }
+    }
+
+    if (direction === 'y') {
+      for (let i = 0; i < ship.len; i++) {
+        current.classList.add('grid-point-hover');
+        let row = Number(current.id.charAt(5)) - 1;
+        if (row < 0) {
+          break;
+        }
+        let col = current.id.charAt(7);
+        current = document.getElementById(`user-${row}-${col}`);
+      }
+    }
+  });
+
+  point.addEventListener('mouseleave', () => {
+    userGrid.forEach((gridPoint) => {
+      gridPoint.classList.remove('grid-point-hover');
+    });
+  });
+
   point.addEventListener('click', () => {
     let coord = point.id.split('-');
     let ship = allShips[user.board.ships.length];
