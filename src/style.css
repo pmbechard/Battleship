@@ -6,6 +6,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 
   font-family: 'VT', monospace;
   overflow-y: auto;
@@ -102,6 +103,7 @@
 .start-btn {
   width: 40vw;
   margin: 30vw;
+  margin-bottom: 0;
   font-size: 32px;
 }
 

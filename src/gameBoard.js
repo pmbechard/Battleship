@@ -24,21 +24,22 @@ export class Board {
       }
     }
     ship.setCoords(pos);
-    return true;
   }
 
   #checkValidPlace(ship, coord, dir) {
     if (coord[0] > 9 || coord[1] > 9) return false;
-    if (dir === 'y' && coord[0] - ship.len + 1 < 0) return false;
-    if (dir === 'y') {
+
+    if (dir === 'x' && coord[1] + ship.len - 1 > 9) return false;
+    if (dir === 'x') {
       for (let i = 0; i < ship.len; i++) {
         if (this.board[coord[0]][coord[1] + i] !== 0) return false;
       }
     }
-    if (dir === 'x' && coord[1] + ship.len > 9) return false;
-    if (dir === 'x') {
+
+    if (dir === 'y' && coord[0] - ship.len + 1 < 0) return false;
+    if (dir === 'y') {
       for (let i = 0; i < ship.len; i++) {
-        if (this.board[coord[0]][coord[1] + i] !== 0) return false;
+        if (this.board[coord[0] - i][coord[1]] !== 0) return false;
       }
     }
     return true;
