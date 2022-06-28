@@ -11,6 +11,23 @@ export function createDom() {
   title.textContent = 'Battleship';
   title.classList.add('title');
 
+  const comBoardContainer = document.createElement('div');
+  mainContent.appendChild(comBoardContainer);
+  comBoardContainer.classList.add('board-container');
+
+  const comBoard = document.createElement('div');
+  comBoardContainer.appendChild(comBoard);
+  comBoard.id = 'com-board';
+  comBoard.classList.add('game-board');
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      const gridPoint = document.createElement('div');
+      comBoard.appendChild(gridPoint);
+      gridPoint.classList.add('grid-point');
+      gridPoint.id = `com-${i}-${j}`;
+    }
+  }
+
   const userBoardContainer = document.createElement('div');
   mainContent.appendChild(userBoardContainer);
   userBoardContainer.classList.add('board-container');
@@ -43,23 +60,6 @@ export function createDom() {
   directionTxt.id = 'dir-txt';
   directionTxt.style.display = 'none';
   directionTxt.style.fontSize = '20px';
-
-  const comBoardContainer = document.createElement('div');
-  mainContent.appendChild(comBoardContainer);
-  comBoardContainer.classList.add('board-container');
-
-  const comBoard = document.createElement('div');
-  comBoardContainer.appendChild(comBoard);
-  comBoard.id = 'com-board';
-  comBoard.classList.add('game-board');
-  for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 10; j++) {
-      const gridPoint = document.createElement('div');
-      comBoard.appendChild(gridPoint);
-      gridPoint.classList.add('grid-point');
-      gridPoint.id = `com-${i}-${j}`;
-    }
-  }
 
   const toastMsg = document.createElement('div');
   mainContent.appendChild(toastMsg);

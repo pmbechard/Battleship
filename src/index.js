@@ -7,8 +7,8 @@ import './style.css';
 createDom();
 let direction = 'x';
 const rotateBtn = document.getElementById('rotate-btn');
+const dirTxt = document.getElementById('dir-txt');
 rotateBtn.addEventListener('click', () => {
-  const dirTxt = document.getElementById('dir-txt');
   if (direction === 'x') {
     direction = 'y';
     dirTxt.textContent = 'direction: y';
@@ -80,15 +80,20 @@ userGrid.forEach((point) => {
       });
     }
     if (user.board.ships.length === 5) {
-      disableUserGrid();
+      initializeGameLayout();
     }
   });
 });
 
-function disableUserGrid() {
+function initializeGameLayout() {
   userGrid.forEach((point) => {
     point.style.pointerEvents = 'none';
   });
+  rotateBtn.style.display = 'none';
+  dirTxt.style.display = 'none';
+
+  const comBoard = document.getElementById('com-board');
+  comBoard.style.display = 'grid';
 }
 
 // TODO:
