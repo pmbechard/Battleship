@@ -14,7 +14,7 @@
 
 .main-content {
   width: 100vw;
-  height: 100vh;
+  height: 97vh;
   background-color: black;
   background-image: url(img/metal-bg.jpg);
   background-size: cover;
@@ -122,6 +122,16 @@ p {
 #enemy-grid-title,
 #user-grid-title {
   margin-bottom: -40px;
+}
+
+footer {
+  height: 3vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: #ddd;
 }
 
 @media only screen and (max-width: 700px) {

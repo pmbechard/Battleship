@@ -103,5 +103,9 @@ export function createDom() {
     }, 5000);
   });
 
-  // TODO: footer
+  const footer = document.createElement('footer');
+  document.body.appendChild(footer);
+  const footerContent = document.createElement('small');
+  footer.appendChild(footerContent);
+  footerContent.innerHTML = 'Peyton Bechard &copy; 2022';
 }
