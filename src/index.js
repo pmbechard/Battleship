@@ -126,6 +126,30 @@ function initializeGameLayout() {
   }
 
   // TODO: place enemy ships
+  placeEnemyShips();
+}
+
+const com = new Player();
+
+function placeEnemyShips() {
+  let enemyShips = [
+    new Ship(5),
+    new Ship(4),
+    new Ship(3),
+    new Ship(3),
+    new Ship(2),
+  ];
+
+  enemyShips.forEach((ship) => {
+    let dir;
+    Math.round(Math.random()) === 0 ? (dir = 'x') : (dir = 'y');
+    let again = false;
+    while (again === false) {
+      let xCoord = Math.round(Math.random() * 9);
+      let yCoord = Math.round(Math.random() * 9);
+      again = com.board.place(ship, [xCoord, yCoord], dir);
+    }
+  });
 }
 
 // TODO: start game loop
