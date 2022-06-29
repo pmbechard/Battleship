@@ -138,30 +138,7 @@ function initializeGameLayout() {
   }
 
   placeEnemyShips();
-
-  const comGrid = document.querySelectorAll('#com-board .grid-point');
-  comGrid.forEach((point) => {
-    point.addEventListener('mouseover', () => {
-      point.classList.add('grid-point-hover');
-    });
-    point.addEventListener('mouseleave', () => {
-      point.classList.remove('grid-point-hover');
-    });
-    point.addEventListener('click', () => {
-      let coord = [
-        Number(point.id.split('-')[1]),
-        Number(point.id.split('-')[2]),
-      ];
-      let currentHits = com.board.hits.length;
-      user.userAttack(coord);
-      if (com.board.hits.length > currentHits) {
-        point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
-      } else {
-        point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
-      }
-      // TODO: send to comTurn()
-    });
-  });
+  userTurn();
 }
 
 function placeEnemyShips() {
@@ -186,8 +163,54 @@ function placeEnemyShips() {
 }
 
 function comTurn() {
-  // TODO: disable com board interactions
-  // TODO: call aiAttack() and update user.board
+  const comGrid = document.querySelectorAll('#com-board .grid-point');
+  comGrid.forEach((point) => {
+    point.addEventListener('click', () => {});
+  });
+  let currentHits = user.board.hits.length;
+  let coord = com.aiAttack();
+  let point = document.getElementById(`user-${coord[0]}-${coord[1]}`);
+  if (user.board.hits.length > currentHits) {
+    point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+  } else {
+    point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
+  }
+
+  if (user.board.checkAllSunk()) {
+    // TODO: Game Over
+  } else {
+    userTurn();
+  }
+}
+
+function userTurn() {
+  const comGrid = document.querySelectorAll('#com-board .grid-point');
+  comGrid.forEach((point) => {
+    point.addEventListener('mouseover', () => {
+      point.classList.add('grid-point-hover');
+    });
+    point.addEventListener('mouseleave', () => {
+      point.classList.remove('grid-point-hover');
+    });
+    point.addEventListener('click', () => {
+      let coord = [
+        Number(point.id.split('-')[1]),
+        Number(point.id.split('-')[2]),
+      ];
+      let currentHits = com.board.hits.length;
+      user.userAttack(coord);
+      if (com.board.hits.length > currentHits) {
+        point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+      } else {
+        point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
+      }
+      if (com.board.checkAllSunk()) {
+        // TODO: Game Over
+      } else {
+        comTurn();
+      }
+    });
+  });
 }
 
 // TODO: add clear function and restart option

@@ -9,13 +9,17 @@ export class Player {
 
   aiAttack() {
     // FIXME: make smarter
-    let coord = [
-      Math.round(Math.random() * 10),
-      Math.round(Math.random() * 10),
-    ];
-    let shot = this.opponent.board().receiveAttack(coord);
-    if (shot === null) return false;
-    return true;
+    while (true) {
+      let coord = [
+        Math.round(Math.random() * 9),
+        Math.round(Math.random() * 9),
+      ];
+      let shot = this.opponent.board.receiveAttack(coord);
+      if (shot === null) {
+        continue;
+      }
+      return coord;
+    }
   }
 
   userAttack(coord) {

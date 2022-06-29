@@ -46,11 +46,12 @@ export class Board {
   }
 
   receiveAttack(coord) {
+    console.log(coord);
     if (this.board[coord[0]][coord[1]] !== 0) {
       this.hits.push(coord);
       this.board[coord[0]][coord[1]].hit(coord);
       if (this.board[coord[0]][coord[1]].isSunk()) {
-        if (this.#checkAllSunk()) {
+        if (this.checkAllSunk()) {
           // TODO: GAME OVER
         }
       }
@@ -63,7 +64,7 @@ export class Board {
     return false;
   }
 
-  #checkAllSunk() {
+  checkAllSunk() {
     return this.ships.filter((ship) => ship.isSunk()).length === 5;
   }
 }
