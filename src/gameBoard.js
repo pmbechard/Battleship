@@ -7,7 +7,7 @@ export class Board {
   }
 
   place(ship, coord, dir) {
-    if (!this.#checkValidPlace(ship, coord, dir)) return false;
+    if (!this.checkValidPlace(ship, coord, dir)) return false;
 
     this.ships.push(ship);
 
@@ -26,7 +26,7 @@ export class Board {
     ship.setCoords(pos);
   }
 
-  #checkValidPlace(ship, coord, dir) {
+  checkValidPlace(ship, coord, dir) {
     if (coord[0] > 9 || coord[1] > 9) return false;
 
     if (dir === 'x' && coord[1] + ship.len - 1 > 9) return false;
@@ -46,7 +46,6 @@ export class Board {
   }
 
   receiveAttack(coord) {
-    console.log(coord);
     if (this.board[coord[0]][coord[1]] !== 0) {
       this.hits.push(coord);
       this.board[coord[0]][coord[1]].hit(coord);

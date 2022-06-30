@@ -25,8 +25,8 @@ rotateBtn.addEventListener('click', () => {
   }
 });
 
-const user = new Player();
-const com = new Player();
+const user = new Player(true);
+const com = new Player(false);
 user.opponent = com;
 com.opponent = user;
 
@@ -139,6 +139,7 @@ function initializeGameLayout() {
 
   placeEnemyShips();
   userTurn();
+  //   gameLoop();
 }
 
 function placeEnemyShips() {
@@ -163,10 +164,10 @@ function placeEnemyShips() {
 }
 
 function comTurn() {
-  const comGrid = document.querySelectorAll('#com-board .grid-point');
-  comGrid.forEach((point) => {
-    point.addEventListener('click', () => {});
-  });
+  //   const comGrid = document.querySelectorAll('#com-board .grid-point');
+  //   comGrid.forEach((point) => {
+  //     point.removeEventListener('click', clicked, false);
+  //   });
   let currentHits = user.board.hits.length;
   let coord = com.aiAttack();
   let point = document.getElementById(`user-${coord[0]}-${coord[1]}`);
@@ -178,12 +179,11 @@ function comTurn() {
 
   if (user.board.checkAllSunk()) {
     // TODO: Game Over
-  } else {
-    userTurn();
   }
 }
 
 function userTurn() {
+  // FIXME: user shouldn't be able to select same spots as before
   const comGrid = document.querySelectorAll('#com-board .grid-point');
   comGrid.forEach((point) => {
     point.addEventListener('mouseover', () => {
@@ -192,25 +192,37 @@ function userTurn() {
     point.addEventListener('mouseleave', () => {
       point.classList.remove('grid-point-hover');
     });
-    point.addEventListener('click', () => {
+    point.addEventListener('click', function clicked() {
       let coord = [
         Number(point.id.split('-')[1]),
         Number(point.id.split('-')[2]),
       ];
       let currentHits = com.board.hits.length;
-      user.userAttack(coord);
-      if (com.board.hits.length > currentHits) {
-        point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
-      } else {
-        point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
-      }
-      if (com.board.checkAllSunk()) {
-        // TODO: Game Over
-      } else {
-        comTurn();
+      let currentMisses = com.board.misses.length;
+      let attack = user.userAttack(coord);
+      if (attack) {
+        if (com.board.hits.length > currentHits) {
+          point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+        } else if (com.board.misses.length > currentMisses) {
+          point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
+        }
+        if (com.board.checkAllSunk()) {
+          // TODO: Game Over
+        } else {
+          if (
+            user.board.hits.length + user.board.misses.length ===
+            com.board.hits.length + com.board.misses.length - 1
+          ) {
+            point.removeEventListener('click', clicked, false);
+            comTurn();
+            console.log('user board: ', user.board.hits, user.board.misses);
+            console.log('com board: ', com.board.hits, com.board.misses);
+          }
+        }
       }
     });
   });
 }
 
+// FIXME: disallow computer duplicate moves
 // TODO: add clear function and restart option

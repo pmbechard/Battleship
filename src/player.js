@@ -1,25 +1,17 @@
 import { Board } from './gameboard';
 
 export class Player {
-  constructor() {
+  constructor(isUser) {
     this.board = new Board();
     this.opponent;
-    // this.isUser;
+    this.isUser = isUser;
   }
 
   aiAttack() {
     // FIXME: make smarter
-    while (true) {
-      let coord = [
-        Math.round(Math.random() * 9),
-        Math.round(Math.random() * 9),
-      ];
-      let shot = this.opponent.board.receiveAttack(coord);
-      if (shot === null) {
-        continue;
-      }
-      return coord;
-    }
+    let coord = [Math.round(Math.random() * 9), Math.round(Math.random() * 9)];
+    let shot = this.opponent.board.receiveAttack(coord);
+    if (shot !== null) return coord;
   }
 
   userAttack(coord) {
@@ -28,3 +20,5 @@ export class Player {
     return true;
   }
 }
+
+// FIXME: user attacks are recording as hits/ misses on both grids??
