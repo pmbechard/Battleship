@@ -11,6 +11,19 @@ import './style.css';
 // startGameLoop()
 // restart()
 
+// FIXME: disallow computer duplicate moves
+// FIXME: refactor index.js functions
+
+// TODO: add toast messages for each turn
+// TODO: add delay to AI turn
+// TODO: add messages to report sunken ships
+// TODO: add Game Over sequence
+// TODO: add clear function and restart option
+
+// TODO: make smarter AI
+// TODO: add ship images
+// TODO: add sound effects
+
 createDom();
 let direction = 'x';
 const rotateBtn = document.getElementById('rotate-btn');
@@ -215,14 +228,9 @@ function userTurn() {
           ) {
             point.removeEventListener('click', clicked, false);
             comTurn();
-            console.log('user board: ', user.board.hits, user.board.misses);
-            console.log('com board: ', com.board.hits, com.board.misses);
           }
         }
       }
     });
   });
 }
-
-// FIXME: disallow computer duplicate moves
-// TODO: add clear function and restart option
