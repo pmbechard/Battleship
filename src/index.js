@@ -1,6 +1,7 @@
 import { createDom } from './domCreation';
 import { Player } from './player';
 import { Ship } from './ship';
+import { setToastMsg } from './toastMsg';
 import './style.css';
 
 // GAME SETUP
@@ -130,26 +131,6 @@ function initializeGameLayout() {
   const enemyGridTitle = document.getElementById('enemy-grid-title');
   enemyGridTitle.style.display = 'grid';
 
-  const toastMsg = document.getElementById('toast');
-  const toastContainer = document.getElementById('toast-container');
-  if (toastContainer.classList.contains('show')) {
-    setTimeout(() => {
-      toastMsg.textContent =
-        'Your turn. Choose a point on the enemy grid to attack.';
-      toastContainer.classList.add('show');
-      setTimeout(function () {
-        toastContainer.classList.remove('show');
-      }, 5000);
-    }, 3000);
-  } else {
-    toastMsg.textContent =
-      'Your turn. Choose a point on the enemy grid to attack.';
-    toastContainer.classList.add('show');
-    setTimeout(function () {
-      toastContainer.classList.remove('show');
-    }, 5000);
-  }
-
   placeEnemyShips();
   userTurn();
   //   gameLoop();
@@ -177,26 +158,26 @@ function placeEnemyShips() {
 }
 
 function comTurn() {
-  //   const comGrid = document.querySelectorAll('#com-board .grid-point');
-  //   comGrid.forEach((point) => {
-  //     point.removeEventListener('click', clicked, false);
-  //   });
-  let currentHits = user.board.hits.length;
-  let coord = com.aiAttack();
-  let point = document.getElementById(`user-${coord[0]}-${coord[1]}`);
-  if (user.board.hits.length > currentHits) {
-    point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
-  } else {
-    point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
-  }
+  setTimeout(() => {
+    let currentHits = user.board.hits.length;
+    let coord = com.aiAttack();
+    let point = document.getElementById(`user-${coord[0]}-${coord[1]}`);
+    if (user.board.hits.length > currentHits) {
+      point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+    } else {
+      point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
+    }
 
-  if (user.board.checkAllSunk()) {
-    // TODO: Game Over
-  }
+    if (user.board.checkAllSunk()) {
+      // TODO: Game Over
+    }
+  }, 3000);
 }
 
 function userTurn() {
   // FIXME: user shouldn't be able to select same spots as before
+  setToastMsg('Your turn. Choose a point on the enemy grid to attack.');
+
   const comGrid = document.querySelectorAll('#com-board .grid-point');
   comGrid.forEach((point) => {
     point.addEventListener('mouseover', () => {
@@ -227,6 +208,7 @@ function userTurn() {
             com.board.hits.length + com.board.misses.length - 1
           ) {
             point.removeEventListener('click', clicked, false);
+
             comTurn();
           }
         }

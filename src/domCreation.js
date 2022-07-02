@@ -1,3 +1,4 @@
+import { setToastMsg } from './toastMsg';
 import bg from './img/metal-bg.jpg';
 import rotateIcon from './img/rotate.png';
 
@@ -5,6 +6,7 @@ export function createDom() {
   const mainContent = document.createElement('div');
   document.body.appendChild(mainContent);
   mainContent.classList.add('main-content');
+  mainContent.id = 'main-content';
 
   const title = document.createElement('h1');
   mainContent.appendChild(title);
@@ -16,7 +18,6 @@ export function createDom() {
   gridsContainer.style.display = 'flex';
   gridsContainer.style.justifyContent = 'center';
   gridsContainer.style.alignItems = 'center';
-  // gridsContainer.style.flexWrap = 'wrap';
   gridsContainer.style.width = '100vw';
   gridsContainer.id = 'grids-container';
 
@@ -82,17 +83,6 @@ export function createDom() {
   directionTxt.id = 'dir-txt';
   directionTxt.style.display = 'none';
 
-  const toastContainer = document.createElement('div');
-  toastContainer.classList.add('toast-container');
-  mainContent.appendChild(toastContainer);
-  toastContainer.id = 'toast-container';
-
-  const toastMsg = document.createElement('div');
-  toastContainer.appendChild(toastMsg);
-  toastMsg.classList.add('toast');
-  toastMsg.id = 'toast';
-  toastMsg.textContent = 'Choose the location of your ships';
-
   const startBtn = document.createElement('button');
   mainContent.appendChild(startBtn);
   startBtn.textContent = 'Start';
@@ -103,10 +93,11 @@ export function createDom() {
     userBoard.style.display = 'grid';
     rotateBtn.style.display = 'block';
     directionTxt.style.display = 'block';
-    toastContainer.classList.add('show');
-    setTimeout(function () {
-      toastContainer.classList.remove('show');
-    }, 5000);
+    setToastMsg('Place the ships on your grid.');
+    // toastContainer.classList.add('show'); // FIXME:
+    // setTimeout(function () {
+    //   toastContainer.classList.remove('show'); // FIXME:
+    // }, 5000);
   });
 
   const footer = document.createElement('footer');
