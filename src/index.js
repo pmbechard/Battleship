@@ -13,10 +13,9 @@ import './style.css';
 // restart()
 
 // FIXME: disallow computer duplicate moves
-// FIXME: refactor index.js functions
 
 // TODO: add toast messages for each turn
-// TODO: add delay to AI turn
+// TODO: add delay to AI turn with waiting animation
 // TODO: add messages to report sunken ships
 // TODO: add Game Over sequence
 // TODO: add clear function and restart option
@@ -25,94 +24,91 @@ import './style.css';
 // TODO: add ship images
 // TODO: add sound effects
 
-createDom();
-let direction = 'x';
-const rotateBtn = document.getElementById('rotate-btn');
-const dirTxt = document.getElementById('dir-txt');
-rotateBtn.addEventListener('click', () => {
-  if (direction === 'x') {
-    direction = 'y';
-    dirTxt.textContent = 'direction: y';
-  } else {
-    direction = 'x';
-    dirTxt.textContent = 'direction: x';
-  }
-});
-
-const user = new Player(true);
-const com = new Player(false);
-user.opponent = com;
-com.opponent = user;
-
-const userGrid = document.querySelectorAll('#user-board .grid-point');
-let allShips = [
-  new Ship(5),
-  new Ship(4),
-  new Ship(3),
-  new Ship(3),
-  new Ship(2),
-];
-userGrid.forEach((point) => {
-  point.addEventListener('mouseover', () => {
-    point.classList.add('grid-point-hover');
-    let ship = allShips[user.board.ships.length];
-    let current = point;
-
+function initializeSetUpScreen() {
+  rotateBtn.addEventListener('click', () => {
     if (direction === 'x') {
-      for (let i = 0; i < ship.len - 1; i++) {
-        if (current.id.charAt(7) === '9') {
-          break;
-        }
-        current.nextElementSibling.classList.add('grid-point-hover');
-        current = current.nextElementSibling;
-      }
-    }
-
-    if (direction === 'y') {
-      for (let i = 0; i < ship.len; i++) {
-        current.classList.add('grid-point-hover');
-        let row = Number(current.id.charAt(5)) - 1;
-        if (row < 0) {
-          break;
-        }
-        let col = current.id.charAt(7);
-        current = document.getElementById(`user-${row}-${col}`);
-      }
+      direction = 'y';
+      dirTxt.textContent = 'direction: y';
+    } else {
+      direction = 'x';
+      dirTxt.textContent = 'direction: x';
     }
   });
 
-  point.addEventListener('mouseleave', () => {
-    userGrid.forEach((gridPoint) => {
-      gridPoint.classList.remove('grid-point-hover');
+  user = new Player(true);
+  com = new Player(false);
+  user.opponent = com;
+  com.opponent = user;
+
+  let allShips = [
+    new Ship(5),
+    new Ship(4),
+    new Ship(3),
+    new Ship(3),
+    new Ship(2),
+  ];
+  userGrid.forEach((point) => {
+    point.addEventListener('mouseover', () => {
+      point.classList.add('grid-point-hover');
+      let ship = allShips[user.board.ships.length];
+      let current = point;
+
+      if (direction === 'x') {
+        for (let i = 0; i < ship.len - 1; i++) {
+          if (current.id.charAt(7) === '9') {
+            break;
+          }
+          current.nextElementSibling.classList.add('grid-point-hover');
+          current = current.nextElementSibling;
+        }
+      }
+
+      if (direction === 'y') {
+        for (let i = 0; i < ship.len; i++) {
+          current.classList.add('grid-point-hover');
+          let row = Number(current.id.charAt(5)) - 1;
+          if (row < 0) {
+            break;
+          }
+          let col = current.id.charAt(7);
+          current = document.getElementById(`user-${row}-${col}`);
+        }
+      }
+    });
+
+    point.addEventListener('mouseleave', () => {
+      userGrid.forEach((gridPoint) => {
+        gridPoint.classList.remove('grid-point-hover');
+      });
+    });
+
+    point.addEventListener('click', () => {
+      let coord = point.id.split('-');
+      let ship = allShips[user.board.ships.length];
+      user.board.place(ship, [Number(coord[1]), Number(coord[2])], direction);
+      if (ship.location.length > 0) {
+        userGrid.forEach((gridPoint) => {
+          ship.location.forEach((loc) => {
+            if (
+              Number(gridPoint.id.split('-')[1]) === loc[0] &&
+              Number(gridPoint.id.split('-')[2]) === loc[1]
+            ) {
+              gridPoint.style.opacity = '0.7';
+              gridPoint.style.backgroundColor = 'rgb(0, 179, 0)';
+              // TODO: add ship image
+            }
+          });
+        });
+      }
+      if (user.board.ships.length === 5) {
+        const userBoard = document.getElementById('user-board');
+        userBoard.style.display = 'none';
+
+        initializeGameLayout();
+      }
     });
   });
-
-  point.addEventListener('click', () => {
-    let coord = point.id.split('-');
-    let ship = allShips[user.board.ships.length];
-    user.board.place(ship, [Number(coord[1]), Number(coord[2])], direction);
-    if (ship.location.length > 0) {
-      userGrid.forEach((gridPoint) => {
-        ship.location.forEach((loc) => {
-          if (
-            Number(gridPoint.id.split('-')[1]) === loc[0] &&
-            Number(gridPoint.id.split('-')[2]) === loc[1]
-          ) {
-            gridPoint.style.opacity = '0.7';
-            gridPoint.style.backgroundColor = 'rgb(0, 179, 0)';
-            // TODO: add ship image
-          }
-        });
-      });
-    }
-    if (user.board.ships.length === 5) {
-      const userBoard = document.getElementById('user-board');
-      userBoard.style.display = 'none';
-
-      initializeGameLayout();
-    }
-  });
-});
+}
 
 function initializeGameLayout() {
   userGrid.forEach((point) => {
@@ -216,3 +212,14 @@ function userTurn() {
     });
   });
 }
+
+createDom();
+
+const userGrid = document.querySelectorAll('#user-board .grid-point');
+let direction = 'x';
+const rotateBtn = document.getElementById('rotate-btn');
+const dirTxt = document.getElementById('dir-txt');
+let com;
+let user;
+
+initializeSetUpScreen();
