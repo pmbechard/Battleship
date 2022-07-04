@@ -151,6 +151,7 @@ function comTurn() {
       showAttackMsg(point, 'hit');
     } else {
       point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
+      //   point.style.backgroundColor = 'rgba(0, 0, 221, 0.7)';
       showAttackMsg(point, 'miss');
     }
 
@@ -160,13 +161,13 @@ function comTurn() {
     setToastMsg('Your turn. Choose a point on the enemy grid to attack.');
 
     if (user.board.checkAllSunk()) {
-      // TODO: Game Over
+      gameOver('com');
+      // TODO: add restart
     }
   }, 1500);
 }
 
 function userTurn() {
-  // FIXME: user shouldn't be able to select same spots as before
   setToastMsg('Your turn. Choose a point on the enemy grid to attack.');
 
   const comGrid = document.querySelectorAll('#com-board .grid-point');
@@ -178,6 +179,8 @@ function userTurn() {
       point.classList.remove('grid-point-hover');
     });
     point.addEventListener('click', function clicked() {
+      //   // TODO: delete me
+      //   gameOver();
       let coord = [
         Number(point.id.split('-')[1]),
         Number(point.id.split('-')[2]),
@@ -191,10 +194,13 @@ function userTurn() {
           showAttackMsg(point, 'hit');
         } else if (com.board.misses.length > currentMisses) {
           point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
+          //   point.style.backgroundColor = 'rgba(0, 0, 221, 0.7)';
+
           showAttackMsg(point, 'miss');
         }
         if (com.board.checkAllSunk()) {
-          // TODO: Game Over
+          gameOver('user');
+          // TODO: add restart
         } else {
           if (
             user.board.hits.length + user.board.misses.length ===
@@ -221,6 +227,28 @@ function showAttackMsg(point, result) {
   setTimeout(() => {
     msg.remove();
   }, 1500);
+}
+
+function gameOver(winner) {
+  setTimeout(() => {
+    const boardContainers = document.querySelectorAll('.board-container');
+    boardContainers.forEach((board) => {
+      board.style.display = 'none';
+    });
+
+    const gameOverTxt = document.createElement('h2');
+    gameOverTxt.textContent = winner === 'user' ? 'You win!' : 'You lose...';
+    gameOverTxt.style.fontSize = 'min(15vw, 72px)';
+    const mainContent = document.getElementById('main-content');
+    const msgContainer = document.createElement('div');
+    msgContainer.style.width = '100vw';
+    msgContainer.style.padding = '50px 0';
+    msgContainer.style.display = 'flex';
+    msgContainer.style.justifyContent = 'center';
+    msgContainer.style.alignItems = 'center';
+    msgContainer.appendChild(gameOverTxt);
+    mainContent.appendChild(msgContainer);
+  }, 3000);
 }
 
 createDom();
