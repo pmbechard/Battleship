@@ -1,4 +1,4 @@
-import { Board } from './gameboard';
+import { Board } from './gameBoard';
 
 export class Player {
   constructor(isUser) {
@@ -9,9 +9,13 @@ export class Player {
 
   aiAttack() {
     // FIXME: make smarter
-    let coord = [Math.round(Math.random() * 9), Math.round(Math.random() * 9)];
-    let shot = this.opponent.board.receiveAttack(coord);
-    if (shot !== null) return coord;
+    let shot = null;
+    let coord;
+    while (shot === null) {
+      coord = [Math.round(Math.random() * 9), Math.round(Math.random() * 9)];
+      shot = this.opponent.board.receiveAttack(coord);
+    }
+    return coord;
   }
 
   userAttack(coord) {

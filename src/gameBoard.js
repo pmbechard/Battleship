@@ -1,9 +1,9 @@
 export class Board {
   constructor() {
     this.board = new Array(10).fill(0).map(() => new Array(10).fill(0));
-    this.hits = [];
-    this.misses = [];
-    this.ships = [];
+    this.hits = new Array();
+    this.misses = new Array();
+    this.ships = new Array();
   }
 
   place(ship, coord, dir) {
@@ -46,21 +46,33 @@ export class Board {
   }
 
   receiveAttack(coord) {
+    for (let i = 0; i < this.hits.length; i++) {
+      if (this.hits[i][0] === coord[0] && this.hits[i][1] === coord[1]) {
+        return null;
+      }
+    }
+
+    for (let i = 0; i < this.misses.length; i++) {
+      if (this.misses[i][0] === coord[0] && this.misses[i][1] === coord[1]) {
+        return null;
+      }
+    }
+
     if (this.board[coord[0]][coord[1]] !== 0) {
-      this.hits.push(coord);
+      this.hits.push({ 0: coord[0], 1: coord[1] });
       this.board[coord[0]][coord[1]].hit(coord);
+
       if (this.board[coord[0]][coord[1]].isSunk()) {
+        // TODO: toast msg sunk ship
         if (this.checkAllSunk()) {
           // TODO: GAME OVER
         }
       }
       return true;
+    } else {
+      this.misses.push({ 0: coord[0], 1: coord[1] });
+      return false;
     }
-    for (let i = 0; i < this.misses.length; i++) {
-      if (this.misses[i] === coord) return null;
-    }
-    this.misses.push(coord);
-    return false;
   }
 
   checkAllSunk() {

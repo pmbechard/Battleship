@@ -14,8 +14,7 @@ import './style.css';
 
 // FIXME: disallow computer duplicate moves
 
-// TODO: add toast messages for each turn
-// TODO: add delay to AI turn with waiting animation
+// TODO: add separate messages for specific events (hit, miss, sink...)
 // TODO: add messages to report sunken ships
 // TODO: add Game Over sequence
 // TODO: add clear function and restart option
