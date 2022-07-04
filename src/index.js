@@ -158,6 +158,7 @@ function comTurn() {
   comGrid.forEach((point) => {
     point.style.pointerEvents = 'none';
   });
+  setToastMsg('Enemy is attacking...', 3000);
   setTimeout(() => {
     let currentHits = user.board.hits.length;
     let coord = com.aiAttack();
@@ -171,6 +172,7 @@ function comTurn() {
     comGrid.forEach((point) => {
       point.style.pointerEvents = 'auto';
     });
+    setToastMsg('Your turn. Choose a point on the enemy grid to attack.');
 
     if (user.board.checkAllSunk()) {
       // TODO: Game Over

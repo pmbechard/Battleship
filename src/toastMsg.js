@@ -1,7 +1,7 @@
 let created = false;
 let storedMsg;
 
-export async function setToastMsg(msg) {
+export async function setToastMsg(msg, time = 5000) {
   if (!created) {
     const mainContent = document.getElementById('main-content');
 
@@ -32,7 +32,7 @@ export async function setToastMsg(msg) {
 
   let newMsg = setTimeout(() => {
     toastContainer.classList.remove('show');
-  }, 5000);
+  }, time);
 
   storedMsg = newMsg;
 }
