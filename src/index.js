@@ -40,11 +40,11 @@ function initializeSetUpScreen() {
   com.opponent = user;
 
   let allShips = [
-    new Ship(5, 'carrier'),
-    new Ship(4, 'battleship'),
-    new Ship(3, 'submarine'),
-    new Ship(3, 'cruiser'),
-    new Ship(2, 'destroyer'),
+    new Ship(5, 'carrier', true),
+    new Ship(4, 'battleship', true),
+    new Ship(3, 'submarine', true),
+    new Ship(3, 'cruiser', true),
+    new Ship(2, 'destroyer', true),
   ];
   userGrid.forEach((point) => {
     point.addEventListener('mouseover', () => {
@@ -133,11 +133,11 @@ function initializeGameLayout() {
 
 function placeEnemyShips() {
   let enemyShips = [
-    new Ship(5, 'carrier'),
-    new Ship(4, 'battleship'),
-    new Ship(3, 'submarine'),
-    new Ship(3, 'cruiser'),
-    new Ship(2, 'destroyer'),
+    new Ship(5, 'carrier', false),
+    new Ship(4, 'battleship', false),
+    new Ship(3, 'submarine', false),
+    new Ship(3, 'cruiser', false),
+    new Ship(2, 'destroyer', false),
   ];
 
   enemyShips.forEach((ship) => {
