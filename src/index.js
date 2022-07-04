@@ -154,6 +154,10 @@ function placeEnemyShips() {
 }
 
 function comTurn() {
+  const comGrid = document.querySelectorAll('#com-board .grid-point');
+  comGrid.forEach((point) => {
+    point.style.pointerEvents = 'none';
+  });
   setTimeout(() => {
     let currentHits = user.board.hits.length;
     let coord = com.aiAttack();
@@ -164,10 +168,14 @@ function comTurn() {
       point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
     }
 
+    comGrid.forEach((point) => {
+      point.style.pointerEvents = 'auto';
+    });
+
     if (user.board.checkAllSunk()) {
       // TODO: Game Over
     }
-  }, 3000);
+  }, 1500);
 }
 
 function userTurn() {
