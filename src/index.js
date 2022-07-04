@@ -4,24 +4,9 @@ import { Ship } from './ship';
 import { setToastMsg } from './toastMsg';
 import './style.css';
 
-// GAME SETUP
-// createDom()
-// ...global code
-// initializeGameLayout()
-// placeEnemyShips()
-// startGameLoop()
-// restart()
-
-// FIXME: disallow computer duplicate moves
-
-// TODO: add separate messages for specific events (hit, miss, sink...)
-// TODO: add messages to report sunken ships
-// TODO: add Game Over sequence
-// TODO: add clear function and restart option
-
+// TODO: add Game Over sequence and restart option
 // TODO: make smarter AI
-// TODO: add ship images
-// TODO: add sound effects
+// TODO: add sound effects ??
 
 function initializeSetUpScreen() {
   rotateBtn.addEventListener('click', () => {
@@ -94,7 +79,6 @@ function initializeSetUpScreen() {
             ) {
               gridPoint.style.opacity = '0.7';
               gridPoint.style.backgroundColor = 'rgb(0, 179, 0)';
-              // TODO: add ship image
             }
           });
         });

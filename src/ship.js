@@ -58,7 +58,6 @@ export class Ship {
 
   isSunk() {
     if (this.damage === this.len) {
-      // TODO: display picture and msg
       let player = this.isUser ? 'user' : 'com';
       const point = document.getElementById(
         `${player}-${this.location[0][0]}-${this.location[0][1]}`

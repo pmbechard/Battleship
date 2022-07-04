@@ -24,5 +24,3 @@ export class Player {
     return true;
   }
 }
-
-// FIXME: user attacks are recording as hits/ misses on both grids??
