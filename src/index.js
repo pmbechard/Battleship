@@ -4,7 +4,6 @@ import { Ship } from './ship';
 import { setToastMsg } from './toastMsg';
 import './style.css';
 
-// TODO: add Game Over sequence and restart option
 // TODO: make smarter AI
 // TODO: add sound effects ??
 
@@ -162,7 +161,6 @@ function comTurn() {
 
     if (user.board.checkAllSunk()) {
       gameOver('com');
-      // TODO: add restart
     }
   }, 1500);
 }
@@ -179,8 +177,9 @@ function userTurn() {
       point.classList.remove('grid-point-hover');
     });
     point.addEventListener('click', function clicked() {
-      //   // TODO: delete me
-      //   gameOver();
+      // TODO: delete me
+      gameOver();
+      // TODO: delete me
       let coord = [
         Number(point.id.split('-')[1]),
         Number(point.id.split('-')[2]),
@@ -200,7 +199,6 @@ function userTurn() {
         }
         if (com.board.checkAllSunk()) {
           gameOver('user');
-          // TODO: add restart
         } else {
           if (
             user.board.hits.length + user.board.misses.length ===
@@ -248,15 +246,36 @@ function gameOver(winner) {
     msgContainer.style.alignItems = 'center';
     msgContainer.appendChild(gameOverTxt);
     mainContent.appendChild(msgContainer);
+
+    const restartBtn = document.createElement('button');
+    mainContent.appendChild(restartBtn);
+    restartBtn.textContent = 'Restart';
+    restartBtn.classList.add('start-btn');
+
+    restartBtn.addEventListener('click', () => {
+      document.body.innerHTML = '';
+      createDom();
+      reInitialize();
+      initializeSetUpScreen();
+    });
   }, 3000);
+}
+
+function reInitialize() {
+  userGrid = document.querySelectorAll('#user-board .grid-point');
+  direction = 'x';
+  rotateBtn = document.getElementById('rotate-btn');
+  dirTxt = document.getElementById('dir-txt');
+  com = undefined;
+  user = undefined;
 }
 
 createDom();
 
-const userGrid = document.querySelectorAll('#user-board .grid-point');
+let userGrid = document.querySelectorAll('#user-board .grid-point');
 let direction = 'x';
-const rotateBtn = document.getElementById('rotate-btn');
-const dirTxt = document.getElementById('dir-txt');
+let rotateBtn = document.getElementById('rotate-btn');
+let dirTxt = document.getElementById('dir-txt');
 let com;
 let user;
 

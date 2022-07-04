@@ -1,11 +1,12 @@
-let created = false;
 let storedMsg;
 
 export async function setToastMsg(msg, time = 5000) {
-  if (!created) {
+  let toastContainer = document.getElementById('toast-container');
+
+  if (toastContainer === null) {
     const mainContent = document.getElementById('main-content');
 
-    const toastContainer = document.createElement('div');
+    toastContainer = document.createElement('div');
     toastContainer.classList.add('toast-container');
     mainContent.appendChild(toastContainer);
     toastContainer.id = 'toast-container';
@@ -14,11 +15,9 @@ export async function setToastMsg(msg, time = 5000) {
     toastContainer.appendChild(toastMsg);
     toastMsg.classList.add('toast');
     toastMsg.id = 'toast';
-    created = true;
   }
 
   let toastMsg = document.getElementById('toast');
-  let toastContainer = document.getElementById('toast-container');
 
   clearTimeout(storedMsg);
   toastContainer.classList.remove('show');

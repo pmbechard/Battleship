@@ -94,10 +94,6 @@ export function createDom() {
     rotateBtn.style.display = 'block';
     directionTxt.style.display = 'block';
     setToastMsg('Place the ships on your grid.');
-    // toastContainer.classList.add('show'); // FIXME:
-    // setTimeout(function () {
-    //   toastContainer.classList.remove('show'); // FIXME:
-    // }, 5000);
   });
 
   const footer = document.createElement('footer');
