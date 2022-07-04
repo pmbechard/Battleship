@@ -20,15 +20,13 @@ export async function setToastMsg(msg, time = 5000) {
   let toastMsg = document.getElementById('toast');
   let toastContainer = document.getElementById('toast-container');
 
-  // FIXME: timer not clearing properly - msgs are a bit jumpy
-
   clearTimeout(storedMsg);
   toastContainer.classList.remove('show');
 
   setTimeout(() => {
     toastContainer.classList.add('show');
     toastMsg.textContent = msg;
-  }, 1000);
+  }, 500);
 
   let newMsg = setTimeout(() => {
     toastContainer.classList.remove('show');

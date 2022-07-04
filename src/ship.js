@@ -1,5 +1,6 @@
 export class Ship {
-  constructor(len) {
+  constructor(len, name) {
+    this.name = name;
     this.len = len;
     this.damage = 0;
     this.location = new Array();
@@ -16,7 +17,10 @@ export class Ship {
   }
 
   isSunk() {
-    return this.damage === this.len;
+    if (this.damage === this.len) {
+      // TODO: display picture and msg
+      return true;
+    }
   }
 
   setCoords(location) {

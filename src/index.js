@@ -40,11 +40,11 @@ function initializeSetUpScreen() {
   com.opponent = user;
 
   let allShips = [
-    new Ship(5),
-    new Ship(4),
-    new Ship(3),
-    new Ship(3),
-    new Ship(2),
+    new Ship(5, 'carrier'),
+    new Ship(4, 'battleship'),
+    new Ship(3, 'submarine'),
+    new Ship(3, 'cruiser'),
+    new Ship(2, 'destroyer'),
   ];
   userGrid.forEach((point) => {
     point.addEventListener('mouseover', () => {
@@ -133,11 +133,11 @@ function initializeGameLayout() {
 
 function placeEnemyShips() {
   let enemyShips = [
-    new Ship(5),
-    new Ship(4),
-    new Ship(3),
-    new Ship(3),
-    new Ship(2),
+    new Ship(5, 'carrier'),
+    new Ship(4, 'battleship'),
+    new Ship(3, 'submarine'),
+    new Ship(3, 'cruiser'),
+    new Ship(2, 'destroyer'),
   ];
 
   enemyShips.forEach((ship) => {
@@ -164,8 +164,10 @@ function comTurn() {
     let point = document.getElementById(`user-${coord[0]}-${coord[1]}`);
     if (user.board.hits.length > currentHits) {
       point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+      showAttackMsg(point, 'hit');
     } else {
       point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
+      showAttackMsg(point, 'miss');
     }
 
     comGrid.forEach((point) => {
@@ -202,8 +204,10 @@ function userTurn() {
       if (attack) {
         if (com.board.hits.length > currentHits) {
           point.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+          showAttackMsg(point, 'hit');
         } else if (com.board.misses.length > currentMisses) {
           point.style.backgroundColor = 'rgba(221, 221, 221, 0.7)';
+          showAttackMsg(point, 'miss');
         }
         if (com.board.checkAllSunk()) {
           // TODO: Game Over
@@ -220,6 +224,19 @@ function userTurn() {
       }
     });
   });
+}
+
+function showAttackMsg(point, result) {
+  let msg = document.createElement('span');
+  point.appendChild(msg);
+  msg.textContent = result;
+  point.style.display = 'flex';
+  point.style.justifyContent = 'center';
+  point.style.alignItems = 'center';
+  msg.classList.add('attack-result');
+  setTimeout(() => {
+    msg.remove();
+  }, 1500);
 }
 
 createDom();
