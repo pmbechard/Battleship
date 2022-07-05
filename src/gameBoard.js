@@ -61,13 +61,6 @@ export class Board {
     if (this.board[coord[0]][coord[1]] !== 0) {
       this.hits.push({ 0: coord[0], 1: coord[1] });
       this.board[coord[0]][coord[1]].hit(coord);
-
-      if (this.board[coord[0]][coord[1]].isSunk()) {
-        // TODO: toast msg sunk ship
-        if (this.checkAllSunk()) {
-          // TODO: GAME OVER
-        }
-      }
       return true;
     } else {
       this.misses.push({ 0: coord[0], 1: coord[1] });

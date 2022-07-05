@@ -177,9 +177,9 @@ function userTurn() {
       point.classList.remove('grid-point-hover');
     });
     point.addEventListener('click', function clicked() {
-      // TODO: delete me
-      gameOver();
-      // TODO: delete me
+      //   // TODO: delete me
+      //   gameOver();
+      //   // TODO: delete me
       let coord = [
         Number(point.id.split('-')[1]),
         Number(point.id.split('-')[2]),
