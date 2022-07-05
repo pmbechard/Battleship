@@ -4,8 +4,8 @@ import { Ship } from './ship';
 import { setToastMsg } from './toastMsg';
 import './style.css';
 
-// TODO: make smarter AI
-// TODO: add sound effects ??
+// TODO: improve AI - add difficulties (easy - random; medium; current; hard - improved)
+// TODO: add sound effects
 
 function initializeSetUpScreen() {
   rotateBtn.addEventListener('click', () => {

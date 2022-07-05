@@ -144,6 +144,17 @@ footer {
   color: #ddd;
 }
 
+.gh-link {
+  height: 15px;
+  margin-left: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.gh-link:hover {
+  cursor: pointer;
+  transform: scale(1.1) rotate(360deg);
+}
+
 @media only screen and (max-width: 700px) {
   #grids-container {
     flex-direction: column;

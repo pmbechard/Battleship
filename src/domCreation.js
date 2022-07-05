@@ -1,6 +1,7 @@
 import { setToastMsg } from './toastMsg';
-import bg from './img/metal-bg.jpg';
+// import bg from './img/metal-bg.jpg';
 import rotateIcon from './img/rotate.png';
+import ghLogo from './img/github.png';
 
 export function createDom() {
   const mainContent = document.createElement('div');
@@ -101,4 +102,13 @@ export function createDom() {
   const footerContent = document.createElement('small');
   footer.appendChild(footerContent);
   footerContent.innerHTML = 'Peyton Bechard &copy; 2022';
+
+  const ghLinkImg = new Image();
+  ghLinkImg.src = ghLogo;
+  ghLinkImg.classList.add('gh-link');
+  footer.appendChild(ghLinkImg);
+
+  ghLinkImg.addEventListener('click', () => {
+    window.open('https://github.com/pmbechard/Battleship', '_blank');
+  });
 }

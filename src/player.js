@@ -54,9 +54,6 @@ export class Player {
             )
           ];
 
-        console.log('locations: ', this.shipUnderAttackLocations);
-        console.log('targeted loc: ', targetedCoord);
-
         if (Math.round(Math.random()) === 0) {
           coord = randomCoord;
         } else {
