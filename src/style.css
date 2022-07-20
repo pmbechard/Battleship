@@ -81,6 +81,7 @@
   font-size: 24px;
   border: 1px solid #ddd;
   box-shadow: 1px 1px 1px #333;
+  z-index: 2;
 }
 
 .toast-container.show {
